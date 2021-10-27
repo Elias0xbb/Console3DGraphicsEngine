@@ -36,6 +36,7 @@ void ConsoleCanvas::draw() const
 		std::cout << "\e[" << row << ";1H";
 		for(int col = 0; col < cols; ++col) std::cout << canvas[col][row];
 	}
+	// std::cout << "rows: " << rows << ", cols: " << cols << '\n';
 }
 
 void ConsoleCanvas::circle(int cx, int cy, double radius, char filling)
@@ -69,6 +70,8 @@ void ConsoleCanvas::line(int x1, int y1, int x2, int y2, char stroke)
 	{
 		double y = m*x+b;
 		int py = (int)y;
+		// TODO: remove error checking here
+		if(x >= 0 && x < cols && y >= 0 && y < rows)
 		set(x, py, stroke);
 	}
 }

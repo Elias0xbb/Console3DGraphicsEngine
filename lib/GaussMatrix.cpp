@@ -52,7 +52,7 @@ void GaussMatrix::solve()
 	// loop through all columns containing coefficients
 	for(std::uint32_t col = 0; col < ( nColumns - 1 ); ++col)
 	{
-		std::cout << "COLUMN " << col << "\n\n";
+	//	std::cout << "COLUMN " << col << "\n\n";
 		// find two rows a, b where matrix[a][col] and matrix[b][col] != 0
 		while(1)
 		{
@@ -77,7 +77,7 @@ void GaussMatrix::solve()
 			subRowAkFromB(b, a, k);
 			if(matrix[b][col] != 0.0)
 			{
-				std::cout << "Matrix[" << b << "]" << "[" << col << "] = " << matrix[b][col] << '\n';
+	//			std::cout << "Matrix[" << b << "]" << "[" << col << "] = " << matrix[b][col] << '\n';
 				matrix[b][col] = 0.0;
 			}
 
@@ -107,8 +107,8 @@ void GaussMatrix::solve()
 				subRowAkFromB(row, lowestRow, k);
 				if(matrix[row][col] != 0)
 				{
-					std::cout << "Matrix[" << row << "][" << col << "] = " << matrix[row][col]
-						<< " -> 0" << '\n';
+	//				std::cout << "Matrix[" << row << "][" << col << "] = " << matrix[row][col]
+	//					<< " -> 0" << '\n';
 					matrix[row][col] = 0;
 				}
 			}

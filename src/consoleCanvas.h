@@ -1,3 +1,6 @@
+#ifndef CONSOLE_CANVAS_H
+#define CONSOLE_CANVAS_H
+
 #include <iostream>
 #include <cmath>
 
@@ -26,3 +29,5 @@ public:
 	// writes the canvas to the terminal window
 	void draw() const;
 };
+
+#endif

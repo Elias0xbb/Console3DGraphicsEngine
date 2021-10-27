@@ -1,3 +1,6 @@
+#ifndef GAUSS_MATRIX_H
+#define GAUSS_MATRIX_H
+
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -47,3 +50,5 @@ public:
 	void solve();
 	void print() const;
 };
+
+#endif
