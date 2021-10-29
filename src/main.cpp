@@ -43,26 +43,44 @@ int main()
 	rotX.set(1,0, 0); rotX.set(1,1, std::cos(angle)); rotX.set(1,2, -std::sin(angle));
 	rotX.set(2,0, 0); rotX.set(2,1, std::sin(angle)); rotX.set(2,2, std::cos(angle));
 
-	CGfxEngine::tri ty;
-	ty.points[0] = Vec3(5, 5, 10);
-	ty.points[1] = Vec3(double(cols)/2.0, lines-5, 10);
-	ty.points[2] = Vec3(cols-5, 5, 10);
+	CGfxEngine::tri tris[12] = {
+		CGfxEngine::tri(Vec3(-1,-1,1), Vec3(-1,1,1), Vec3(1,-1,1)),
+		CGfxEngine::tri(Vec3(1,-1,1), Vec3(-1,1,1), Vec3(1,1,1)),
+
+		CGfxEngine::tri(Vec3(1,-1,2), Vec3(1,-1,1), Vec3(1,1,1)),
+		CGfxEngine::tri(Vec3(1,-1,2), Vec3(1,1,1), Vec3(1,1,2)),
+
+		CGfxEngine::tri(Vec3(-1,-1,2), Vec3(-1,-1,1), Vec3(1,-1,1)),
+		CGfxEngine::tri(Vec3(1,-1,1), Vec3(1,-1,2), Vec3(-1,-1,2)),
+
+		CGfxEngine::tri(Vec3(1,-1,2), Vec3(-1,-1,2), Vec3(1,1,2)),
+		CGfxEngine::tri(Vec3(1,1,2), Vec3(-1,-1,2), Vec3(-1,1,2)),
+
+		CGfxEngine::tri(Vec3(-1,-1,2), Vec3(-1,-1,1), Vec3(-1,1,2)),
+		CGfxEngine::tri(Vec3(-1,-1,1), Vec3(-1,1,1), Vec3(-1,1,2)),
+
+		CGfxEngine::tri(Vec3(1,1,2), Vec3(-1,1,1), Vec3(1,1,1)),
+		CGfxEngine::tri(Vec3(1,1,2), Vec3(-1,1,2), Vec3(-1,1,1))
+	};
 
 	while(1)
 	{
  		gfx.deleteTris();
 		
 		// get the middle of the triangle
-		Vec3 axis(ty.points[1]);
+		Vec3 axis(tris[0].points[1]);
 
-		for(int i = 0; i < 3; ++i)
+		for(int tr = 0; tr < 12; ++tr)
 		{
-			Vec3 pr = rotX * (rotY * (ty.points[i] - axis)) + axis;
-			ty.points[i] = pr;
- 			ty.points[i].setZ(double(ty.points[i].getZ()) + double(time)/100000);
+			for(int i = 0; i < 3; ++i)
+			{
+				Vec3 pr = rotX * (rotY * (tris[tr].points[i] - axis)) + axis;
+				tris[tr].points[i] = pr;
+ 				tris[tr].points[i].setZ(double(tris[tr].points[i].getZ()) + 0.0001);
+			}
+			gfx.insertTri(tris[tr]);
 		}
 
-		gfx.insertTri(ty);
 
 		// render all points
 		gfx.render();

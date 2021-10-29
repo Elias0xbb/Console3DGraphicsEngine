@@ -13,21 +13,29 @@ public:
 	CGfxEngine() = delete;
 	CGfxEngine(int rows, int columns): c(rows, columns), mat3x4(3, 4)
 	{
-		viewerPos.setX(double(columns)/2.0);
-		viewerPos.setY(double(rows)/2.0);
-		viewerPos.setZ(-75.0);
+		viewerPos = Vec3(0,0,-1);
+		viewVector = Vec3(0,0,1);
 
-		viewVector.setX(0);
-		viewVector.setY(0);
-		viewVector.setZ(75.0);
+		this->rows = rows;
+		this->cols = columns;
 	}
 
 	struct tri
 	{
+		tri() = default;
+		tri(Vec3 p0, Vec3 p1, Vec3 p2)
+		{
+			points[0] = p0;
+			points[1] = p1;
+			points[2] = p2;
+		}
 		Vec3 points[3];
 	};
+
 private:
 	ConsoleCanvas c;
+	int rows, cols;
+	double xScalar = 0.5, yScalar = 1;
 	// position of the viewer
 	Vec3 viewerPos;
 	// view direction, distance to canvas

@@ -72,7 +72,17 @@ void ConsoleCanvas::line(int x1, int y1, int x2, int y2, char stroke)
 		int py = (int)y;
 		// TODO: remove error checking here
 		if(x >= 0 && x < cols && y >= 0 && y < rows)
-		set(x, py, stroke);
+			set(x, py, stroke);
+	}
+
+	m = double(x2 - x1) / double(y2 - y1);
+	b = x1 - m*y1;
+
+	for(int y = y1; y <= y2; ++y)
+	{
+		int px = int(m*y+b);
+		if(px >= 0 && px < cols && y >= 0 && y < rows)
+			set(px, y, stroke);
 	}
 }
 
