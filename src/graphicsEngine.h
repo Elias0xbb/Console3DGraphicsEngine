@@ -35,7 +35,6 @@ public:
 private:
 	ConsoleCanvas c;
 	int rows, cols;
-	double xScalar = 0.5, yScalar = 1;
 	// position of the viewer
 	Vec3 viewerPos;
 	// view direction, distance to canvas

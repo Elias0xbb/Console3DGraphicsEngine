@@ -86,8 +86,8 @@ void CGfxEngine::draw()
 		tri t = projectedTris.front();
 		for(int i = 0; i < 3; ++i)
 		{
-			t.points[i].setX(xScalar * double(cols) / 2 + (t.points[i].getX() + 1) * xScalar * double(cols) / 2.0);
-			t.points[i].setY((t.points[i].getY() + 1) * yScalar * double(rows) / 2.0);
+			t.points[i].setX((t.points[i].getX() + 1) * double(cols) / 2);
+			t.points[i].setY((t.points[i].getY() + 1) * double(rows) / 2);
 		}
 		
 		c.triangle(

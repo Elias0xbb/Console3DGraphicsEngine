@@ -23,7 +23,7 @@ public:
 	// draws a circle
 	void circle(int cx, int cy, double radius, char filling);
 	// draws a line between two points
-	void line(int x1, int y1, int x2, int y2, char stroke);
+	void line(int x1, int y1, int x2, int y2, char stroke, double width);
 	// draws a triangle
 	void triangle(int x1, int y1, int x2, int y2, int x3, int y3, char stroke);
 	// writes the canvas to the terminal window

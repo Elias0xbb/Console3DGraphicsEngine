@@ -51,46 +51,26 @@ void ConsoleCanvas::circle(int cx, int cy, double radius, char filling)
 	}
 }
 
-void ConsoleCanvas::line(int x1, int y1, int x2, int y2, char stroke)
+void ConsoleCanvas::line(int x1, int y1, int x2, int y2, char stroke, double width)
 {
-	if(x1 > x2)
-	{
-		int x1tmp = x1, y1tmp = y1;
-		x1 = x2;
-		y1 = y2;
-		x2 = x1tmp;
-		y2 = y1tmp;
-	}
+	// looking how close each pixel is to the line using complex numbers
+	// line = x * ( dx + dyi)
+	double dx = x2 - x1;
+	double dy = y2 - y1;
 
-	double m = double(y2 - y1) / double(x2 - x1);
-	double b = y1 - m*x1;
-
-	// draw the line
-	for(int x = x1; x <= x2; ++x)
-	{
-		double y = m*x+b;
-		int py = (int)y;
-		// TODO: remove error checking here
-		if(x >= 0 && x < cols && y >= 0 && y < rows)
-			set(x, py, stroke);
-	}
-
-	m = double(x2 - x1) / double(y2 - y1);
-	b = x1 - m*y1;
-
-	for(int y = y1; y <= y2; ++y)
-	{
-		int px = int(m*y+b);
-		if(px >= 0 && px < cols && y >= 0 && y < rows)
-			set(px, y, stroke);
-	}
+	for(int y = 0; y < cols; ++y)
+		for(int x = 0; x < rows; ++x)
+		{
+			double p = (y*dx - x*dy) / (dx*dx + dy*dy);
+			if(p < width) set(x, y, stroke);
+		}
 }
 
 void ConsoleCanvas::triangle(int x1, int y1, int x2, int y2, int x3, int y3, char stroke)
 {
-	line(x1,y1, x2,y2, stroke);
-	line(x2,y2, x3,y3, stroke);
-	line(x1,y1, x3,y3, stroke);
+	line(x1,y1, x2,y2, stroke, 0.01);
+	line(x2,y2, x3,y3, stroke, 0.01);
+	line(x1,y1, x3,y3, stroke, 0.01);
 }
 
 #endif

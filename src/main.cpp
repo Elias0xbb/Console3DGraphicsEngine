@@ -32,35 +32,37 @@ int main()
 
 
 	// 2D rotation matrix
-	const double angle = 0.0001;
+	const double angleX = 0.0001;
+	const double angleY = 0.0005;
+
 	Matrix rotY(3, 3);
-	rotY.set(0,0, std::cos(angle)); rotY.set(0,1, 0); rotY.set(0,2, std::sin(angle));
+	rotY.set(0,0, std::cos(angleY)); rotY.set(0,1, 0); rotY.set(0,2, std::sin(angleY));
 	rotY.set(1,0, 0); rotY.set(1,1, 1); rotY.set(1,2, 0);
-	rotY.set(2,0, -std::sin(angle)); rotY.set(2,1, 0); rotY.set(2,2, std::cos(angle));
+	rotY.set(2,0, -std::sin(angleY)); rotY.set(2,1, 0); rotY.set(2,2, std::cos(angleY));
 
 	Matrix rotX(3, 3);
 	rotX.set(0,0, 1); rotX.set(0,1, 0); rotX.set(0,2, 0);
-	rotX.set(1,0, 0); rotX.set(1,1, std::cos(angle)); rotX.set(1,2, -std::sin(angle));
-	rotX.set(2,0, 0); rotX.set(2,1, std::sin(angle)); rotX.set(2,2, std::cos(angle));
+	rotX.set(1,0, 0); rotX.set(1,1, std::cos(angleX)); rotX.set(1,2, -std::sin(angleX));
+	rotX.set(2,0, 0); rotX.set(2,1, std::sin(angleX)); rotX.set(2,2, std::cos(angleX));
 
 	CGfxEngine::tri tris[12] = {
-		CGfxEngine::tri(Vec3(-1,-1,1), Vec3(-1,1,1), Vec3(1,-1,1)),
-		CGfxEngine::tri(Vec3(1,-1,1), Vec3(-1,1,1), Vec3(1,1,1)),
+		CGfxEngine::tri(Vec3(-1,-1,5), Vec3(-1,1,5), Vec3(1,-1,5)),
+		CGfxEngine::tri(Vec3(1,-1,5), Vec3(-1,1,5), Vec3(1,1,5)),
 
-		CGfxEngine::tri(Vec3(1,-1,2), Vec3(1,-1,1), Vec3(1,1,1)),
-		CGfxEngine::tri(Vec3(1,-1,2), Vec3(1,1,1), Vec3(1,1,2)),
+		CGfxEngine::tri(Vec3(1,-1,5), Vec3(1,-1,5), Vec3(1,1,5)),
+		CGfxEngine::tri(Vec3(1,-1,6), Vec3(1,1,5), Vec3(1,1,6)),
 
-		CGfxEngine::tri(Vec3(-1,-1,2), Vec3(-1,-1,1), Vec3(1,-1,1)),
-		CGfxEngine::tri(Vec3(1,-1,1), Vec3(1,-1,2), Vec3(-1,-1,2)),
+		CGfxEngine::tri(Vec3(-1,-1,6), Vec3(-1,-1,5), Vec3(1,-1,5)),
+		CGfxEngine::tri(Vec3(1,-1,5), Vec3(1,-1,6), Vec3(-1,-1,6)),
 
-		CGfxEngine::tri(Vec3(1,-1,2), Vec3(-1,-1,2), Vec3(1,1,2)),
-		CGfxEngine::tri(Vec3(1,1,2), Vec3(-1,-1,2), Vec3(-1,1,2)),
+		CGfxEngine::tri(Vec3(1,-1,6), Vec3(-1,-1,6), Vec3(1,1,6)),
+		CGfxEngine::tri(Vec3(1,1,6), Vec3(-1,-1,6), Vec3(-1,1,6)),
 
-		CGfxEngine::tri(Vec3(-1,-1,2), Vec3(-1,-1,1), Vec3(-1,1,2)),
-		CGfxEngine::tri(Vec3(-1,-1,1), Vec3(-1,1,1), Vec3(-1,1,2)),
+		CGfxEngine::tri(Vec3(-1,-1,6), Vec3(-1,-1,5), Vec3(-1,1,6)),
+		CGfxEngine::tri(Vec3(-1,-1,5), Vec3(-1,1,5), Vec3(-1,1,6)),
 
-		CGfxEngine::tri(Vec3(1,1,2), Vec3(-1,1,1), Vec3(1,1,1)),
-		CGfxEngine::tri(Vec3(1,1,2), Vec3(-1,1,2), Vec3(-1,1,1))
+		CGfxEngine::tri(Vec3(1,1,6), Vec3(-1,1,5), Vec3(1,1,5)),
+		CGfxEngine::tri(Vec3(1,1,6), Vec3(-1,1,6), Vec3(-1,1,5))
 	};
 
 	while(1)
